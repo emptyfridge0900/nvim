@@ -78,6 +78,15 @@ tag stack
 ### ctrl+o
 jump list
 
+netrw
+:Ex
+netrw에서 %는 파일생성
+netrw에서 d는 폴더생성
+
+runtime path
+:h rtp
+
+v로 블록 지정하고 = 누르면 포맷해줌
 https://superuser.com/questions/782391/vim-enclose-in-quotes
 https://stackoverflow.com/questions/41758217/whats-the-difference-between-command-cw-and-ciw-in-vim
 https://github.com/tpope/vim-surround
