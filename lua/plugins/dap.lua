@@ -37,15 +37,16 @@ return {
                         command = vim.fn.stdpath("data") .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg',
                         args = {'--interpreter=vscode'}
                     }
-
+                    
                     config.configurations.cs = {{
                         type = "coreclr",
                         name = "launch - netcoredbg",
                         request = "launch",
                         program = function()
-                            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+                            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/' .. vim.fn.expand('%:p:h:t') .. '/' .. '/bin/Debug/', 'file')
                         end
                     }}
+                    require('mason-nvim-dap').default_setup(config)
                 end,
             },
 
