@@ -43,7 +43,11 @@ return {
                         name = "launch - netcoredbg",
                         request = "launch",
                         program = function()
-                            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/' .. vim.fn.expand('%:p:h:t') .. '/' .. '/bin/Debug/', 'file')
+                            if vim.fn.has('win32') == 1 then
+                                return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/' .. vim.fn.expand('%:p:h:t') .. '/' .. '/bin/Debug/', 'file')
+                            end    
+                            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+
                         end
                     }}
                     require('mason-nvim-dap').default_setup(config)
