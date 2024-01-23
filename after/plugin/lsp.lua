@@ -118,17 +118,19 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+local pid = vim.fn.getpid()
+
 local lspconfig = require("lspconfig")
-lspconfig.csharp_ls.setup({
+lspconfig.omnisharp.setup({
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { "csharp-ls"},
+  cmd = { "OmniSharp","--languageserver",'--hostPID', tostring(pid)},
   filetypes = { "cs" },
   init_options = { AutomaticWorkspaceInit = true },
-  root_dir = lspconfig.util.root_pattern("*.sln", ".git"),
+  root_dir = lspconfig.util.root_pattern("*.sln","*.csproj", ".git"),
   --root_dir = function ()return vim.loop.cwd() end,
   handlers = {
-    ["textDocument/definition"] = require('csharpls_extended').handler,
-    ["textDocument/typeDefinition"] = require('csharpls_extended').handler,
+    ["textDocument/definition"] = require('omnisharp_extended').handler,
+    ["textDocument/typeDefinition"] = require('omnisharp_extended').handler,
   },
 })
