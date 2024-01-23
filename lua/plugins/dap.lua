@@ -108,9 +108,13 @@ return {
                     require('mason-nvim-dap').default_setup(config)
                 end,
                 coreclr = function(config)
+                	local path_to_netcoredbg = vim.fn.stdpath("data") .. '/mason/packages/netcoredbg/libexec/netcoredbg'
+                	if vim.fn.has('win32')==1 then
+                	    path_to_netcoredbg= vim.fn.stdpath("data") .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg'
+                	end
                     config.adapters = {
                         type = 'executable',
-                        command = vim.fn.stdpath("data") .. '/mason/packages/netcoredbg/netcoredbg/netcoredbg',
+                        command = path_to_netcoredbg,
                         args = {'--interpreter=vscode'}
                     }
                     config.configurations.cs = {{
